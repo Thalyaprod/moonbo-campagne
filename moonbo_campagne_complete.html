@@ -131,6 +131,51 @@
   .panel-sub { font-size: 15px; color: var(--gray-mid); margin-bottom: 36px; font-weight: 300; }
   .divider { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
 
+  /* ── ACCORDION SCRIPT ── */
+  .accordion {
+    background: white; border: 1px solid var(--border);
+    border-radius: 12px; margin-bottom: 20px; cursor: pointer;
+    overflow: hidden;
+  }
+  .accordion-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 28px;
+  }
+  .accordion-title {
+    font-family: var(--font-display); font-size: 17px; font-weight: 400;
+  }
+  .accordion-icon {
+    font-size: 20px; color: var(--pink); transition: transform .25s;
+    line-height: 1;
+  }
+  .accordion.open .accordion-icon { transform: rotate(180deg); }
+  .accordion-body {
+    display: none; padding: 0 28px 24px; border-top: 1px solid var(--border);
+  }
+  .accordion.open .accordion-body { display: block; }
+  .script-scene {
+    display: flex; gap: 16px; padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .script-scene:last-child { border-bottom: none; }
+  .script-num {
+    font-size: 22px; min-width: 32px; color: var(--pink); line-height: 1.2;
+  }
+  .script-title {
+    font-weight: 600; font-size: 14px; margin-bottom: 6px; color: var(--dark);
+  }
+  .script-note {
+    font-weight: 400; font-size: 12px; color: var(--gray-mid);
+    margin-left: 6px;
+  }
+  .script-content p { font-size: 14px; color: #555; line-height: 1.7; }
+  .script-line {
+    margin-top: 10px; padding: 12px 16px;
+    background: var(--bg); border-left: 3px solid var(--pink);
+    border-radius: 0 8px 8px 0;
+    font-style: italic; font-size: 14px; color: var(--dark); line-height: 1.6;
+  }
+
   .idea-block {
     background: white; border: 1px solid var(--border);
     border-radius: 12px; padding: 28px 32px; margin-bottom: 20px;
@@ -723,6 +768,54 @@
       <div class="spec-val">Voix off + texte écran</div>
     </div>
   </div>
+
+  <hr class="divider">
+
+  <div class="accordion" onclick="this.classList.toggle('open')">
+    <div class="accordion-header">
+      <span class="accordion-title">Script — Déroulé vidéo</span>
+      <span class="accordion-icon">▾</span>
+    </div>
+    <div class="accordion-body">
+
+      <div class="script-scene">
+        <div class="script-num">①</div>
+        <div class="script-content">
+          <div class="script-title">Hook macro <span class="script-note">pas de voix</span></div>
+          <p>Shots en mode footporn / macro sur les textures : milkshake, donut, bubble tea. Slow-motion, pas de contexte. Juste la musique.</p>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="script-num">②</div>
+        <div class="script-content">
+          <div class="script-title">Façade Plaza <span class="script-note">voix off</span></div>
+          <p>Plan extérieur sur la façade Moonbo, Plaza reconnaissable derrière.</p>
+          <div class="script-line">"Ils viennent d'ouvrir une nouvelle boutique à Plaza… et on en parle déjà."</div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="script-num">③</div>
+        <div class="script-content">
+          <div class="script-title">Préparation par l'employé <span class="script-note">voix off</span></div>
+          <p>Plans serrés sur les mains de l'employé qui prépare une boisson. Texte à l'écran sur les cuts : <strong>DONUTS. / BUBBLE TEA. / MILKSHAKES.</strong> avec des sounds effects immersifs.</p>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="script-num">④</div>
+        <div class="script-content">
+          <div class="script-title">POV final <span class="script-note">employé, face caméra</span></div>
+          <p>L'employé tend directement la boisson vers la caméra, comme s'il la livrait au spectateur. Il regarde droit dans l'objectif.</p>
+          <div class="script-line">"Moonbo vient d'ouvrir à Plaza, et on attend que tu viennes découvrir."</div>
+          <p style="margin-top:8px; font-size:13px; color: var(--gray-mid);">Fade sur le logo Moonbo.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
 
