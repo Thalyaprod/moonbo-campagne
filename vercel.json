@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/moonbo_campagne_complete.html" }
+  ]
+}
