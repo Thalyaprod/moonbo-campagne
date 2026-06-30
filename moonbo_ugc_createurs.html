@@ -16,8 +16,6 @@
     --green-light: #E1F5EE;
     --amber: #BA7517;
     --amber-light: #FAF0E0;
-    --red: #C0392B;
-    --red-light: #FDECEA;
     --gray: #888780;
     --gray-light: #D3D1C7;
     --border: rgba(26,26,24,0.1);
@@ -46,17 +44,20 @@
   .selector-bar {
     background: white;
     border-bottom: 1px solid var(--border);
-    padding: 20px 48px;
+    padding: 12px 20px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
     position: sticky;
     top: 0;
     z-index: 100;
-    flex-wrap: wrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
-  .selector-label { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); white-space: nowrap; }
-  .creator-cards { display: flex; gap: 10px; flex-wrap: wrap; }
+  .selector-bar::-webkit-scrollbar { display: none; }
+  .selector-label { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); white-space: nowrap; flex-shrink: 0; }
+  .creator-cards { display: flex; gap: 10px; flex-wrap: nowrap; flex-shrink: 0; }
   .creator-btn {
     display: flex; align-items: center; gap: 10px;
     background: var(--cream); border: 2px solid var(--border);
@@ -89,74 +90,66 @@
     background: linear-gradient(135deg, var(--pink), #f8a5c2);
     display: flex; align-items: center; justify-content: center;
     font-size: 28px; flex-shrink: 0; border: 3px solid var(--pink-mid);
+    overflow: hidden;
   }
+  .creator-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .cb-avatar { width: 36px; height: 36px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 2px solid var(--pink-mid); }
+  .cb-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
   .creator-info h1 { font-family: var(--font-display); font-size: 28px; font-weight: 400; margin-bottom: 4px; }
   .creator-info h1 em { color: var(--pink); font-style: italic; }
   .creator-handle { font-size: 13px; color: var(--pink); font-weight: 500; margin-bottom: 8px; }
   .creator-bio { font-size: 13px; color: var(--gray); max-width: 600px; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
   .tag { font-size: 11px; padding: 3px 9px; border-radius: 20px; border: 1px solid var(--border); color: var(--gray); }
-  .score-block { margin-left: auto; text-align: center; flex-shrink: 0; }
-  .score-circle {
-    width: 80px; height: 80px; border-radius: 50%;
-    background: var(--green);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    margin: 0 auto 8px;
-  }
-  .score-circle.amber { background: var(--amber); }
-  .score-num { font-size: 26px; font-weight: 700; color: white; line-height: 1; }
-  .score-denom { font-size: 11px; color: rgba(255,255,255,.7); }
-  .score-label { font-size: 11px; font-weight: 500; color: var(--green); letter-spacing: .06em; text-transform: uppercase; }
-  .score-label.amber { color: var(--amber); }
+  .stat-pill-row { margin-left: auto; display: flex; gap: 10px; flex-shrink: 0; }
+  .stat-pill { background: var(--cream); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; text-align: center; min-width: 80px; }
+  .stat-pill .sp-val { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--dark); line-height: 1; }
+  .stat-pill .sp-label { font-size: 9px; letter-spacing: .08em; text-transform: uppercase; color: var(--gray); margin-top: 3px; }
 
   /* CONTENT */
   .content { max-width: 960px; margin: 0 auto; padding: 40px 48px; }
   .section-label { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gray); margin-bottom: 16px; display: block; }
 
-  /* KPI */
-  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 32px; }
-  .kpi-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
-  .kpi-label { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); margin-bottom: 6px; }
-  .kpi-val { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--dark); line-height: 1; margin-bottom: 4px; }
-  .kpi-sub { font-size: 11px; color: var(--gray); }
-  .kpi-badge { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 10px; margin-top: 6px; }
-  .badge-green { background: var(--green-light); color: var(--green); }
-  .badge-amber { background: var(--amber-light); color: var(--amber); }
-  .badge-red { background: var(--red-light); color: var(--red); }
+  /* PORTRAIT */
+  .portrait-block { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; margin-bottom: 32px; }
+  .portrait-block h3 { font-family: var(--font-display); font-size: 19px; font-weight: 400; margin-bottom: 14px; }
+  .portrait-block h3 em { color: var(--pink); font-style: italic; }
+  .portrait-block p { font-size: 13.5px; color: #444; line-height: 1.8; margin-bottom: 12px; }
+  .portrait-block p:last-child { margin-bottom: 0; }
 
-  /* BLOCKS */
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
-  .block { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 22px 24px; }
-  .block h3 { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-
-  /* BARS */
-  .bar-item { margin-bottom: 12px; }
-  .bar-header { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; }
-  .bar-label { color: var(--dark); font-weight: 400; }
-  .bar-pct { color: var(--gray); font-weight: 500; }
-  .bar-track { background: var(--cream); border-radius: 4px; height: 5px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 4px; background: var(--pink); }
-  .bar-fill.green { background: var(--green); }
-
-  /* STAT ROWS */
-  .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-  .stat-row:last-child { border-bottom: none; }
-  .stat-key { color: var(--gray); }
-  .stat-val { font-weight: 500; color: var(--dark); }
+  /* VIDEO GRID */
+  .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+  .video-card {
+    background: white; border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden; display: flex; flex-direction: column;
+  }
+  .ig-fallback {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 480px; background: linear-gradient(135deg, var(--pink-light), var(--pink-mid));
+    text-decoration: none; gap: 12px;
+  }
+  .ig-fallback-icon { width: 52px; height: 52px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--pink); }
+  .ig-fallback-label { font-size: 12px; color: var(--pink); font-weight: 500; }
+  .ig-embed-wrap {
+    width: 100%; background: #fafafa; overflow: hidden;
+    display: flex; align-items: flex-start; justify-content: center;
+  }
+  .ig-embed-wrap iframe {
+    width: 100% !important; min-width: 0 !important;
+    border: none; display: block;
+  }
+  .video-info { padding: 12px 16px; border-top: 1px solid var(--border); }
+  .video-info .vi-title { font-size: 12.5px; font-weight: 500; color: var(--dark); margin-bottom: 2px; }
+  .video-info .vi-desc { font-size: 11.5px; color: var(--gray); line-height: 1.5; }
 
   /* SIGNALS */
   .signal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 32px; }
   .signal-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; gap: 12px; align-items: flex-start; }
   .signal-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; margin-top: 2px; }
   .signal-icon.pos { background: var(--green-light); }
-  .signal-icon.neg { background: var(--red-light); }
   .signal-icon.neu { background: var(--amber-light); }
   .signal-text { font-size: 12px; color: var(--dark); line-height: 1.5; }
   .signal-text strong { display: block; font-size: 13px; margin-bottom: 2px; }
-
-  /* BRAND TAGS */
-  .brand-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-  .brand-tag { font-size: 12px; padding: 4px 12px; border-radius: 20px; background: var(--cream); border: 1px solid var(--border); color: var(--dark); font-weight: 400; }
 
   /* CONCLUSION */
   .conclusion { background: var(--dark); border-radius: 14px; padding: 32px 36px; margin-bottom: 32px; color: white; }
@@ -170,7 +163,6 @@
   .v-val { font-size: 14px; font-weight: 500; color: white; }
   .v-val.pos { color: #6EDBB8; }
   .v-val.neu { color: #F5C775; }
-  .v-val.neg { color: #F08080; }
 
   footer { background: var(--dark); padding: 18px 48px; display: flex; justify-content: space-between; align-items: center; }
   footer p { font-size: 11px; color: var(--gray); }
@@ -180,10 +172,10 @@
     header { padding: 14px 18px; flex-direction: column; gap: 8px; align-items: flex-start; }
     .selector-bar { padding: 14px 18px; }
     .hero { padding: 24px 18px; flex-direction: column; gap: 16px; }
-    .score-block { margin-left: 0; }
+    .stat-pill-row { margin-left: 0; }
     .content { padding: 24px 18px; }
-    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-    .two-col, .signal-grid { grid-template-columns: 1fr; }
+    .video-grid { grid-template-columns: 1fr; }
+    .signal-grid { grid-template-columns: 1fr; }
     .verdict-row { flex-direction: column; }
     footer { flex-direction: column; gap: 4px; padding: 14px 18px; text-align: center; }
   }
@@ -198,7 +190,7 @@
   </div>
   <div class="header-meta">
     <strong>Campagne Plaza · Guyane 2026</strong>
-    Données Hafi · Juin 2026
+    Sélection JUMPLAB · Juin 2026
   </div>
 </header>
 
@@ -206,286 +198,287 @@
 <div class="selector-bar">
   <span class="selector-label">Profil</span>
   <div class="creator-cards">
-    <button class="creator-btn active" onclick="showCreator('leely', this)">
-      <span class="cb-emoji">👑</span>
-      <div>
-        <span class="cb-name">Leely Queen</span>
-        <span class="cb-handle">@_leelyqueen</span>
-        <span class="cb-score">Score 85/100 · 16K abonnés</span>
-      </div>
-    </button>
-    <button class="creator-btn" onclick="showCreator('thany', this)">
-      <span class="cb-emoji">✨</span>
+    <button class="creator-btn active" onclick="showCreator('bethany', this)">
+      <div class="cb-avatar"><img src="bethany.jpg" alt="Bethany"></div>
       <div>
         <span class="cb-name">Bethany Rebin</span>
         <span class="cb-handle">@thanygram_</span>
-        <span class="cb-score">Score 70/100 · 21K abonnés</span>
+        <span class="cb-score">21K abonnés · Lifestyle</span>
+      </div>
+    </button>
+    <button class="creator-btn" onclick="showCreator('emy', this)">
+      <div class="cb-avatar"><img src="emy.jpg" alt="Emy"></div>
+      <div>
+        <span class="cb-name">Emy DRS</span>
+        <span class="cb-handle">@emy_ft_</span>
+        <span class="cb-score">2.4K abonnés · Fitness & Food</span>
+      </div>
+    </button>
+    <button class="creator-btn" onclick="showCreator('sereres', this)">
+      <div class="cb-avatar"><img src="serena.jpg" alt="Séréna"></div>
+      <div>
+        <span class="cb-name">Séréna</span>
+        <span class="cb-handle">@an__eres</span>
+        <span class="cb-score">1.9K abonnés · Reporter local</span>
+      </div>
+    </button>
+    <button class="creator-btn" onclick="showCreator('akbnaya', this)">
+      <div class="cb-avatar"><img src="aya.jpg" alt="Aya"></div>
+      <div>
+        <span class="cb-name">Aya</span>
+        <span class="cb-handle">@akbnaya</span>
+        <span class="cb-score">5.6K abonnés · Events & Lifestyle</span>
       </div>
     </button>
   </div>
 </div>
 
-<!-- ========== PANEL LEELY ========== -->
-<div id="panel-leely" class="panel active">
+<!-- ========== PANEL BETHANY ========== -->
+<div id="panel-bethany" class="panel active">
   <div class="hero">
-    <div class="creator-avatar">👑</div>
+    <div class="creator-avatar"><img src="bethany.jpg" alt="Bethany"></div>
     <div class="creator-info">
-      <h1><em>@_leelyqueen</em></h1>
-      <div class="creator-handle">Instagram · Content creator · Guyane française</div>
-      <div class="creator-bio">Créatrice de contenu lifestyle, curvy model et fashion addict basée en Guyane. Univers ancré dans la mode, la beauté et le quotidien. Profil représentatif de la cible locale Moonbo.</div>
+      <h1><em>@thanygram_</em></h1>
+      <div class="creator-handle">Instagram · Créatrice de contenu & Influenceuse · Guyane française</div>
+      <div class="creator-bio">Créatrice de contenu et influenceuse lifestyle basée en Guyane, Bethany partage sa vie de maman, ses découvertes du quotidien et des collaborations variées. Sa communauté engagée la suit autant pour ses recommandations que pour son univers spontané, chaleureux et ancré dans le réel.</div>
       <div class="tags">
-        <span class="tag">Mode</span><span class="tag">Beauté</span><span class="tag">Lifestyle</span><span class="tag">Guyane française</span><span class="tag">Curvy</span>
+        <span class="tag">Lifestyle</span><span class="tag">Maman</span><span class="tag">Mode</span><span class="tag">Beauté</span><span class="tag">Guyane française</span>
       </div>
     </div>
-    <div class="score-block">
-      <div class="score-circle">
-        <span class="score-num">85</span>
-        <span class="score-denom">/100</span>
-      </div>
-      <div class="score-label">Très bon niveau</div>
+    <div class="stat-pill-row">
+      <div class="stat-pill"><div class="sp-val">21K</div><div class="sp-label">Abonnés</div></div>
+      <div class="stat-pill"><div class="sp-val">3.9%</div><div class="sp-label">Engagement</div></div>
     </div>
   </div>
 
   <div class="content">
-    <span class="section-label">Chiffres clés du compte</span>
-    <div class="kpi-grid">
-      <div class="kpi-card">
-        <div class="kpi-label">Abonnés</div>
-        <div class="kpi-val">16K</div>
-        <div class="kpi-sub">~16 000 followers</div>
-        <span class="kpi-badge badge-amber">+5.78%/an</span>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Taux d'engagement</div>
-        <div class="kpi-val">3.37%</div>
-        <div class="kpi-sub">Moyenne des posts</div>
-        <span class="kpi-badge badge-amber">Niveau moyen</span>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Audience active</div>
-        <div class="kpi-val">11.3K</div>
-        <div class="kpi-sub">71% du total</div>
-        <span class="kpi-badge badge-green">Bonne qualité</span>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Vues moyennes</div>
-        <div class="kpi-val">6K</div>
-        <div class="kpi-sub">Par Reel</div>
-        <span class="kpi-badge badge-amber">Niveau moyen</span>
-      </div>
+    <div class="portrait-block">
+      <h3>Qui est <em>Bethany</em> ?</h3>
+      <p>Bethany incarne une proximité naturelle avec sa communauté. Maman, créatrice de contenu et influenceuse lifestyle, elle filme son quotidien à Cayenne avec un ton chaleureux et sans filtre. Avec 21K abonnés et un taux d'engagement de 3.9%, elle a construit une vraie relation de confiance avec son audience — ses recommandations résonnent comme des conseils d'amie, pas comme des publicités.</p>
+      <p>Elle a déjà collaboré avec des enseignes locales comme le Mercure Cayenne ou des restaurants du coin, ce qui en fait une voix familière et crédible auprès du public guyanais. Sa touche food occasionnelle s'intègre parfaitement dans l'univers gourmand de Moonbo.</p>
     </div>
 
-    <span class="section-label">Audience & démographie</span>
-    <div class="two-col">
-      <div class="block">
-        <h3>Localisation de l'audience</h3>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Guyane Française</span><span class="bar-pct">33.3%</span></div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">France métropolitaine</span><span class="bar-pct">22.1%</span></div><div class="bar-track"><div class="bar-fill" style="width:66%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Guadeloupe</span><span class="bar-pct">7.2%</span></div><div class="bar-track"><div class="bar-fill" style="width:22%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Martinique</span><span class="bar-pct">5.9%</span></div><div class="bar-track"><div class="bar-fill" style="width:18%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Guyana</span><span class="bar-pct">5.3%</span></div><div class="bar-track"><div class="bar-fill" style="width:16%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Autres</span><span class="bar-pct">26.2%</span></div><div class="bar-track"><div class="bar-fill" style="width:79%"></div></div></div>
+    <span class="section-label">Exemples de contenus publiés</span>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="ig-embed-wrap"><iframe src="https://www.instagram.com/p/DZpsHaOuEFW/embed/" height="480" scrolling="no" allowtransparency="true"></iframe></div>
+        <div class="video-info"><div class="vi-title">Publication récente</div><div class="vi-desc">Contenu lifestyle dans son cadre de vie habituel.</div></div>
       </div>
-      <div class="block">
-        <h3>Profil démographique</h3>
-        <div class="stat-row"><span class="stat-key">Genre dominant</span><span class="stat-val">Femme — 68.5%</span></div>
-        <div class="stat-row"><span class="stat-key">Tranche d'âge principale</span><span class="stat-val">25–34 ans — 46%</span></div>
-        <div class="stat-row"><span class="stat-key">18–34 ans (cumulé)</span><span class="stat-val">~64%</span></div>
-        <div class="stat-row"><span class="stat-key">Part adultes</span><span class="stat-val">87%</span></div>
-        <div class="stat-row"><span class="stat-key">Vraies personnes</span><span class="stat-val">10.5K — 65.5%</span></div>
-        <div class="stat-row"><span class="stat-key">Comptes suspects</span><span class="stat-val">1.7K — 10.8%</span></div>
+      <div class="video-card">
+        <div class="ig-embed-wrap"><iframe src="https://www.instagram.com/p/DVPAlr2D98a/embed/" height="480" scrolling="no" allowtransparency="true"></iframe></div>
+        <div class="video-info"><div class="vi-title">Publication lifestyle</div><div class="vi-desc">Moment de vie partagé avec sa communauté.</div></div>
       </div>
-    </div>
-
-    <div class="two-col">
-      <div class="block">
-        <h3>Centres d'intérêt de l'audience</h3>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Mode</span><span class="bar-pct">80%</span></div><div class="bar-track"><div class="bar-fill green" style="width:100%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Beauté</span><span class="bar-pct">73%</span></div><div class="bar-track"><div class="bar-fill green" style="width:91%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Mannequinat</span><span class="bar-pct">58%</span></div><div class="bar-track"><div class="bar-fill green" style="width:73%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Maquillage</span><span class="bar-pct">51%</span></div><div class="bar-track"><div class="bar-fill green" style="width:64%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Luxe</span><span class="bar-pct">50%</span></div><div class="bar-track"><div class="bar-fill green" style="width:63%"></div></div></div>
-      </div>
-      <div class="block">
-        <h3>Performance d'engagement</h3>
-        <div class="stat-row"><span class="stat-key">ER moyen (tous posts)</span><span class="stat-val">3.37%</span></div>
-        <div class="stat-row"><span class="stat-key">Likes moyens</span><span class="stat-val">186</span></div>
-        <div class="stat-row"><span class="stat-key">Commentaires moyens</span><span class="stat-val">3</span></div>
-        <div class="stat-row"><span class="stat-key">Taux de commentaires</span><span class="stat-val">0.06% — Très bon</span></div>
-        <div class="stat-row"><span class="stat-key">ER contenu sponsorisé</span><span class="stat-val">1.06% — Faible</span></div>
-        <div class="stat-row"><span class="stat-key">Fréquence pub sponsorisée</span><span class="stat-val">&lt;1/sem (32% du contenu)</span></div>
+      <div class="video-card">
+        <div class="ig-embed-wrap"><iframe src="https://www.instagram.com/p/DRzjVr7jtLS/embed/" height="480" scrolling="no" allowtransparency="true"></iframe></div>
+        <div class="video-info"><div class="vi-title">Publication collab</div><div class="vi-desc">Exemple de collaboration avec une marque locale.</div></div>
       </div>
     </div>
 
     <span class="section-label">Points clés à retenir</span>
     <div class="signal-grid">
-      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Ancrage local fort</strong>33% de l'audience en Guyane française — pertinence directe pour un lancement à Plaza Cayenne.</div></div>
-      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Cible alignée avec Moonbo</strong>Femmes 25–34 ans, lifestyle, gourmandise — correspondance directe avec la cible de la franchise.</div></div>
-      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Commentateurs de qualité</strong>L'Oréal Paris, Kiabi, Michelle Mono parmi les commentateurs — signal de crédibilité marque.</div></div>
-      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Sécurité marque confirmée</strong>0 contenu négatif sur 9 catégories analysées — profil sans risque pour une collaboration.</div></div>
-      <div class="signal-card"><div class="signal-icon neu">~</div><div class="signal-text"><strong>Croissance à consolider</strong>+5.78%/an vs 11.77% pour les comptes similaires — compte stable mais en deçà de la moyenne.</div></div>
-      <div class="signal-card"><div class="signal-icon neu">~</div><div class="signal-text"><strong>Likes cachés</strong>Le compte a activé les likes cachés — le taux d'engagement ne peut pas être évalué avec une précision totale.</div></div>
-      <div class="signal-card"><div class="signal-icon neg">!</div><div class="signal-text"><strong>ER sponsorisé plus faible</strong>1.06% vs 3.37% en organique — à prendre en compte dans le brief créatif.</div></div>
-      <div class="signal-card"><div class="signal-icon neg">!</div><div class="signal-text"><strong>Authenticité commentaires</strong>Quelques commentaires non authentiques détectés — anomalie commune, non bloquante.</div></div>
-    </div>
-
-    <div class="block" style="margin-bottom: 32px;">
-      <h3>Marques déjà mentionnées (10 au total)</h3>
-      <div class="brand-row">
-        <span class="brand-tag">@kiabi_antilles_guyane ×5</span>
-        <span class="brand-tag">@parfumerieclub</span>
-        <span class="brand-tag">@hylaevolution</span>
-        <span class="brand-tag">@sweetbee_makeup</span>
-        <span class="brand-tag">@thepalm_agency</span>
-        <span class="brand-tag">Beauty ×6</span>
-        <span class="brand-tag">Accessories ×2</span>
-        <span class="brand-tag">Health & Medicine ×2</span>
-      </div>
-      <p style="font-size:12px;color:var(--gray);margin-top:12px;">Kiabi Antilles-Guyane est sa marque partenaire principale avec 5 mentions — preuve d'une capacité à mener des collaborations locales sur le long terme.</p>
+      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Ton authentique</strong>Sa communauté la perçoit comme une amie qui recommande, pas une vitrine publicitaire.</div></div>
+      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Ancrage Guyane confirmé</strong>Collaborations locales déjà établies — Mercure Cayenne, restaurants du coin.</div></div>
+      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Univers compatible Moonbo</strong>Sa touche food occasionnelle s'aligne naturellement avec l'identité gourmande de la marque.</div></div>
+      <div class="signal-card"><div class="signal-icon neu">~</div><div class="signal-text"><strong>Peu de contenu sponsorisé</strong>Une fréquence faible de publications de marque — gage d'authenticité, mais à cadrer dans le brief.</div></div>
     </div>
 
     <div class="conclusion">
       <h2>Notre lecture du <em>profil</em></h2>
-      <p>@_leelyqueen présente un profil solide pour une collaboration locale. Son audience guyanaise (33%) est directement en phase avec la zone de chalandise de Moonbo Plaza, et sa cible — femmes 25–34 ans, sensibles au lifestyle et à la gourmandise — correspond précisément à celle de la franchise.</p>
-      <p>Son score de qualité de 85/100 reflète une communauté active et authentique. L'écart entre son engagement organique (3.37%) et sponsorisé (1.06%) est un point d'attention : il souligne l'importance d'un brief créatif qui lui laisse sa liberté de ton.</p>
-      <p>Son expérience avec Kiabi Antilles-Guyane démontre une capacité à porter une marque locale de façon durable — exactement ce que Moonbo peut initier pour installer sa présence sur le marché guyanais.</p>
+      <p>Bethany apporte une voix locale, chaleureuse et crédible — exactement le ton qu'on recherche pour un lancement qui mise sur la proximité plutôt que sur la promotion pure. Son expérience avec des enseignes guyanaises rassure sur sa capacité à porter une marque sans perdre son authenticité.</p>
       <div class="verdict-row">
-        <div class="verdict-item"><div class="v-label">Ancrage local</div><div class="v-val pos">Très pertinent</div></div>
-        <div class="verdict-item"><div class="v-label">Alignement cible</div><div class="v-val pos">Excellent</div></div>
-        <div class="verdict-item"><div class="v-label">Sécurité marque</div><div class="v-val pos">Confirmée</div></div>
-        <div class="verdict-item"><div class="v-label">Engagement sponsorisé</div><div class="v-val neu">À surveiller</div></div>
+        <div class="verdict-item"><div class="v-label">Ton & authenticité</div><div class="v-val pos">Excellent</div></div>
+        <div class="verdict-item"><div class="v-label">Ancrage local</div><div class="v-val pos">Confirmé</div></div>
+        <div class="verdict-item"><div class="v-label">Alignement Moonbo</div><div class="v-val pos">Très bon</div></div>
         <div class="verdict-item"><div class="v-label">Recommandation</div><div class="v-val pos">Profil retenu</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ========== PANEL THANY ========== -->
-<div id="panel-thany" class="panel">
+<!-- ========== PANEL EMY ========== -->
+<div id="panel-emy" class="panel">
   <div class="hero">
-    <div class="creator-avatar">✨</div>
+    <div class="creator-avatar"><img src="emy.jpg" alt="Emy"></div>
     <div class="creator-info">
-      <h1><em>@thanygram_</em></h1>
-      <div class="creator-handle">Instagram · Créatrice de contenu · Guyane française</div>
-      <div class="creator-bio">Créatrice de contenu lifestyle basée en Guyane, Bethany partage sa vie de maman, ses découvertes du quotidien et des collaborations variées. Son univers est spontané, chaleureux, ancré dans le réel.</div>
+      <h1><em>@emy_ft_</em></h1>
+      <div class="creator-handle">Emy DRS · UGC Creator · Guyane française</div>
+      <div class="creator-bio">Mannequin fitness et créatrice de contenu UGC. Univers food, fashion & events — un mélange dynamique entre lifestyle sportif et moments gourmands, avec une grande aisance devant la caméra.</div>
       <div class="tags">
-        <span class="tag">Lifestyle</span><span class="tag">Maman</span><span class="tag">Mode</span><span class="tag">Beauté</span><span class="tag">Guyane française</span>
+        <span class="tag">Fitness</span><span class="tag">Food</span><span class="tag">Fashion</span><span class="tag">Events</span><span class="tag">UGC Creator</span>
       </div>
     </div>
-    <div class="score-block">
-      <div class="score-circle amber">
-        <span class="score-num">70</span>
-        <span class="score-denom">/100</span>
-      </div>
-      <div class="score-label amber">Bon niveau</div>
+    <div class="stat-pill-row">
+      <div class="stat-pill"><div class="sp-val">2.4K</div><div class="sp-label">Abonnés</div></div>
+      <div class="stat-pill"><div class="sp-val">44</div><div class="sp-label">Publications</div></div>
     </div>
   </div>
 
   <div class="content">
-    <span class="section-label">Chiffres clés du compte</span>
-    <div class="kpi-grid">
-      <div class="kpi-card">
-        <div class="kpi-label">Abonnés</div>
-        <div class="kpi-val">21K</div>
-        <div class="kpi-sub">~21 000 followers</div>
-        <span class="kpi-badge badge-green">+11.51%/an</span>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Taux d'engagement</div>
-        <div class="kpi-val">3.92%</div>
-        <div class="kpi-sub">Moyenne des posts</div>
-        <span class="kpi-badge badge-green">Bon niveau</span>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Audience active</div>
-        <div class="kpi-val">15.5K</div>
-        <div class="kpi-sub">72% du total</div>
-        <span class="kpi-badge badge-green">Bonne qualité</span>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Likes moyens</div>
-        <div class="kpi-val">764</div>
-        <div class="kpi-sub">28 commentaires moy.</div>
-        <span class="kpi-badge badge-green">Très actif</span>
-      </div>
+    <div class="portrait-block">
+      <h3>Qui est <em>Emy</em> ?</h3>
+      <p>Emy se positionne explicitement comme créatrice UGC — c'est son métier, pas juste une activité annexe. Son univers mêle fitness, mode et food, avec une vraie aisance à se mettre en scène dans des formats courts et dynamiques, déjà visible dans ses propres contenus (festival de gâteaux, outfit ideas, beach vibes).</p>
+      <p>Si sa communauté est plus restreinte que les autres profils, elle compense par une qualité de production et une polyvalence créative qui en font un bon choix pour un contenu food à forte valeur visuelle — exactement ce que recherche la vidéo hero ou un contenu UGC ciblé sur l'expérience produit.</p>
     </div>
 
-    <span class="section-label">Audience & démographie</span>
-    <div class="two-col">
-      <div class="block">
-        <h3>Localisation de l'audience</h3>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">France métropolitaine</span><span class="bar-pct">23.3%</span></div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Guyane Française</span><span class="bar-pct">16.0%</span></div><div class="bar-track"><div class="bar-fill" style="width:69%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Suriname</span><span class="bar-pct">14.5%</span></div><div class="bar-track"><div class="bar-fill" style="width:62%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Brésil</span><span class="bar-pct">4.3%</span></div><div class="bar-track"><div class="bar-fill" style="width:18%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Guadeloupe</span><span class="bar-pct">3.9%</span></div><div class="bar-track"><div class="bar-fill" style="width:17%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Autres</span><span class="bar-pct">38.1%</span></div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+    <span class="section-label">Exemples de contenus publiés</span>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="ig-embed-wrap"><iframe src="https://www.instagram.com/p/DXht7NKkX1r/embed/" height="480" scrolling="no" allowtransparency="true"></iframe></div>
+        <div class="video-info"><div class="vi-title">Publication food/lifestyle</div><div class="vi-desc">Mise en scène soignée, univers gourmand et esthétique.</div></div>
       </div>
-      <div class="block">
-        <h3>Profil démographique</h3>
-        <div class="stat-row"><span class="stat-key">Genre dominant</span><span class="stat-val">Femme — 59.2%</span></div>
-        <div class="stat-row"><span class="stat-key">Tranche d'âge principale</span><span class="stat-val">25–34 ans — 48%</span></div>
-        <div class="stat-row"><span class="stat-key">18–34 ans (cumulé)</span><span class="stat-val">~75%</span></div>
-        <div class="stat-row"><span class="stat-key">Part adultes</span><span class="stat-val">84%</span></div>
-        <div class="stat-row"><span class="stat-key">Vraies personnes</span><span class="stat-val">13.7K — 64.3%</span></div>
-        <div class="stat-row"><span class="stat-key">Comptes suspects</span><span class="stat-val">2.3K — 10.5%</span></div>
+      <div class="video-card">
+        <a href="https://www.instagram.com/reel/DYsfonJJC5y/" target="_blank">
+          <img src="emy-reel2.jpg.png" alt="Reel dynamique" style="width:100%;height:480px;object-fit:cover;display:block;">
+        </a>
+        <div class="video-info"><div class="vi-title">Reel dynamique</div><div class="vi-desc">Format court, rythme soigné — proche du style recherché pour Moonbo.</div></div>
       </div>
-    </div>
-
-    <div class="two-col">
-      <div class="block">
-        <h3>Centres d'intérêt de l'audience</h3>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Mode</span><span class="bar-pct">77%</span></div><div class="bar-track"><div class="bar-fill green" style="width:100%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Beauté</span><span class="bar-pct">66%</span></div><div class="bar-track"><div class="bar-fill green" style="width:86%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Danse</span><span class="bar-pct">52%</span></div><div class="bar-track"><div class="bar-fill green" style="width:68%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Mannequinat</span><span class="bar-pct">50%</span></div><div class="bar-track"><div class="bar-fill green" style="width:65%"></div></div></div>
-        <div class="bar-item"><div class="bar-header"><span class="bar-label">Voyages</span><span class="bar-pct">46%</span></div><div class="bar-track"><div class="bar-fill green" style="width:60%"></div></div></div>
-      </div>
-      <div class="block">
-        <h3>Performance d'engagement</h3>
-        <div class="stat-row"><span class="stat-key">ER moyen (tous posts)</span><span class="stat-val">3.92%</span></div>
-        <div class="stat-row"><span class="stat-key">Likes moyens</span><span class="stat-val">764</span></div>
-        <div class="stat-row"><span class="stat-key">Commentaires moyens</span><span class="stat-val">28</span></div>
-        <div class="stat-row"><span class="stat-key">Taux de commentaires</span><span class="stat-val">0.11% — Très bon</span></div>
-        <div class="stat-row"><span class="stat-key">ER contenu sponsorisé</span><span class="stat-val">3.64% — Normal</span></div>
-        <div class="stat-row"><span class="stat-key">Fréquence pub sponsorisée</span><span class="stat-val">&lt;1/sem (12.5% du contenu)</span></div>
+      <div class="video-card">
+        <a href="https://www.instagram.com/reel/DZS13isJ6V5/" target="_blank">
+          <img src="emy-reel3.jpg.png" alt="Reel gourmand" style="width:100%;height:480px;object-fit:cover;display:block;">
+        </a>
+        <div class="video-info"><div class="vi-title">Reel gourmand</div><div class="vi-desc">Festival de Gâteaux — univers food assumé, mise en scène soignée.</div></div>
       </div>
     </div>
 
     <span class="section-label">Points clés à retenir</span>
     <div class="signal-grid">
-      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>ER solide</strong>3.92% — meilleur que 67% des comptes de même taille.</div></div>
-      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>ER sponsorisé cohérent</strong>3.64% sur le contenu sponsorisé — quasi identique à l'organique, signal fort.</div></div>
-      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Forte croissance annuelle</strong>+11.51%/an — parmi les meilleurs de sa catégorie.</div></div>
-      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Sécurité marque confirmée</strong>0 contenu négatif sur 9 catégories analysées.</div></div>
-      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Collaborations locales établies</strong>Mercure Cayenne, restaurants locaux — ancrage dans l'écosystème guyanais.</div></div>
-      <div class="signal-card"><div class="signal-icon neu">~</div><div class="signal-text"><strong>Ancrage Guyane second</strong>16% d'audience guyanaise — solide mais moins concentré que @_leelyqueen (33%).</div></div>
-      <div class="signal-card"><div class="signal-icon neu">~</div><div class="signal-text"><strong>Croissance 30j négative</strong>-0.04% sur les 30 derniers jours — légère baisse récente, à surveiller.</div></div>
-      <div class="signal-card"><div class="signal-icon neg">!</div><div class="signal-text"><strong>Score qualité plus bas</strong>70/100 vs 85/100 — anomalies détectées dans les abonnés, non bloquant.</div></div>
-    </div>
-
-    <div class="block" style="margin-bottom: 32px;">
-      <h3>Marques déjà mentionnées (4 au total)</h3>
-      <div class="brand-row">
-        <span class="brand-tag">@mercure_cayenne_royal ×2</span>
-        <span class="brand-tag">@ceraveoutremer</span>
-        <span class="brand-tag">@restaurantpariscayenne</span>
-        <span class="brand-tag">@lebadbayofficiel ×3</span>
-        <span class="brand-tag">@thepalm_agency</span>
-      </div>
-      <p style="font-size:12px;color:var(--gray);margin-top:12px;">Profil ancré dans l'écosystème local guyanais — hôtellerie, restauration, beauté. Ses collaborations reflètent un lifestyle de proximité très en phase avec un lancement Moonbo Plaza.</p>
+      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Créatrice UGC dédiée</strong>Son activité principale est la production de contenu pour des marques — savoir-faire confirmé.</div></div>
+      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Univers food déjà présent</strong>Contenu "Festival de gâteaux" qui montre une aisance naturelle sur le sujet gourmand.</div></div>
+      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Qualité de production</strong>Formats soignés, mise en scène travaillée — pertinent pour un rendu pornfood.</div></div>
+      <div class="signal-card"><div class="signal-icon neu">~</div><div class="signal-text"><strong>Communauté plus restreinte</strong>2.4K abonnés — portée plus limitée, mais cohérente avec un format UGC ciblé plutôt que viral.</div></div>
     </div>
 
     <div class="conclusion">
       <h2>Notre lecture du <em>profil</em></h2>
-      <p>@thanygram_ offre un profil très engagé avec un ER de 3.92% — supérieur à @_leelyqueen — et surtout un ER sponsorisé quasi identique à son engagement organique (3.64%). C'est un signal fort : son audience réagit de la même façon à son contenu de marque qu'à son contenu personnel.</p>
-      <p>Son ancrage guyanais est réel (16%) mais moins concentré. En revanche, ses collaborations avec le Mercure Cayenne et des restaurants locaux témoignent d'un lifestyle de proximité naturellement aligné avec l'univers Moonbo Plaza.</p>
-      <p>Avec seulement 12.5% de contenu sponsorisé, elle préserve une authenticité perçue par sa communauté — un avantage non négligeable pour un lancement qui mise sur la recommandation locale.</p>
+      <p>Emy apporte une dimension plus créative et visuelle à la sélection. Son positionnement de créatrice UGC professionnelle, combiné à son univers food déjà existant, en fait un profil pertinent pour un contenu qui mise sur l'esthétique et la mise en scène plutôt que sur la portée pure.</p>
       <div class="verdict-row">
-        <div class="verdict-item"><div class="v-label">Ancrage local</div><div class="v-val neu">Bon</div></div>
-        <div class="verdict-item"><div class="v-label">Engagement</div><div class="v-val pos">Excellent</div></div>
-        <div class="verdict-item"><div class="v-label">ER sponsorisé</div><div class="v-val pos">Très cohérent</div></div>
-        <div class="verdict-item"><div class="v-label">Sécurité marque</div><div class="v-val pos">Confirmée</div></div>
+        <div class="verdict-item"><div class="v-label">Qualité créative</div><div class="v-val pos">Très bonne</div></div>
+        <div class="verdict-item"><div class="v-label">Univers food</div><div class="v-val pos">Déjà présent</div></div>
+        <div class="verdict-item"><div class="v-label">Portée</div><div class="v-val neu">Plus restreinte</div></div>
+        <div class="verdict-item"><div class="v-label">Recommandation</div><div class="v-val pos">Profil retenu</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PANEL SERERES ========== -->
+<div id="panel-sereres" class="panel">
+  <div class="hero">
+    <div class="creator-avatar"><img src="serena.jpg" alt="Séréna"></div>
+    <div class="creator-info">
+      <h1><em>@an__eres</em></h1>
+      <div class="creator-handle">Séréna · Reporter pour @sortir_en_guyane · Guyane française</div>
+      <div class="creator-bio">Séréna documente le quotidien guyanais avec un regard de reporter — sorties, lieux, brunchs, découvertes locales. Son contenu mélange photographie soignée et formats reels dynamiques, avec une vraie sensibilité narrative.</div>
+      <div class="tags">
+        <span class="tag">Reportage local</span><span class="tag">Photographie</span><span class="tag">Lifestyle</span><span class="tag">Bons plans Guyane</span>
+      </div>
+    </div>
+    <div class="stat-pill-row">
+      <div class="stat-pill"><div class="sp-val">1.9K</div><div class="sp-label">Abonnés</div></div>
+      <div class="stat-pill"><div class="sp-val">82</div><div class="sp-label">Publications</div></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="portrait-block">
+      <h3>Qui est <em>Séréna</em> ?</h3>
+      <p>Séréna porte une double casquette qui la rend particulière dans cette sélection : créatrice de contenu et reporter pour le compte @sortir_en_guyane, référence locale des sorties et bons plans en Guyane. Elle a donc une vraie expérience de la mise en valeur de lieux et d'établissements guyanais.</p>
+      <p>Son contenu personnel — brunchs, balades, découvertes — montre une approche soignée et esthétique, avec des formats reels travaillés (review de lieux, mises en scène léchées). C'est un profil qui sait raconter un endroit, pas seulement le montrer.</p>
+    </div>
+
+    <span class="section-label">Exemples de contenus publiés</span>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="ig-embed-wrap"><iframe src="https://www.instagram.com/p/DYPxUt9GlW4/embed/" height="480" scrolling="no" allowtransparency="true"></iframe></div>
+        <div class="video-info"><div class="vi-title">Publication lifestyle</div><div class="vi-desc">Mise en scène soignée, esthétique personnelle affirmée.</div></div>
+      </div>
+      <div class="video-card">
+        <div class="ig-embed-wrap"><iframe src="https://www.instagram.com/reel/DXB_JNYABsE/embed/" height="480" scrolling="no" allowtransparency="true"></iframe></div>
+        <div class="video-info"><div class="vi-title">Reel découverte de lieu</div><div class="vi-desc">Format proche d'une review de lieu — pertinent pour un contenu Plaza.</div></div>
+      </div>
+      <div class="video-card">
+        <div class="ig-embed-wrap"><iframe src="https://www.instagram.com/reel/DZdcHHiPMrB/embed/" height="480" scrolling="no" allowtransparency="true"></iframe></div>
+        <div class="video-info"><div class="vi-title">Reel reportage local</div><div class="vi-desc">Approche narrative sur un lieu ou une expérience guyanaise.</div></div>
+      </div>
+    </div>
+
+    <span class="section-label">Points clés à retenir</span>
+    <div class="signal-grid">
+      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Expérience reporter confirmée</strong>Collabore déjà avec @sortir_en_guyane — sait mettre en valeur un lieu de façon professionnelle.</div></div>
+      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Sens du récit visuel</strong>Formats "review de lieu" déjà maîtrisés — transposable directement à Moonbo Plaza.</div></div>
+      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Ancrage Guyane fort</strong>Contenu 100% local, identité guyanaise affirmée dans sa ligne édito.</div></div>
+      <div class="signal-card"><div class="signal-icon neu">~</div><div class="signal-text"><strong>Communauté plus restreinte</strong>1.9K abonnés en propre — sa force réside dans la qualité narrative plus que la portée.</div></div>
+    </div>
+
+    <div class="conclusion">
+      <h2>Notre lecture du <em>profil</em></h2>
+      <p>Séréna apporte une compétence rare dans cette sélection : l'expérience concrète de mise en valeur de lieux guyanais via son rôle de reporter. C'est un profil pertinent si on veut un contenu qui raconte Plaza comme une découverte plutôt qu'une simple vitrine produit.</p>
+      <div class="verdict-row">
+        <div class="verdict-item"><div class="v-label">Sens du lieu</div><div class="v-val pos">Excellent</div></div>
+        <div class="verdict-item"><div class="v-label">Ancrage local</div><div class="v-val pos">Très fort</div></div>
+        <div class="verdict-item"><div class="v-label">Portée</div><div class="v-val neu">Plus restreinte</div></div>
+        <div class="verdict-item"><div class="v-label">Recommandation</div><div class="v-val pos">Profil retenu</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PANEL AKBNAYA ========== -->
+<div id="panel-akbnaya" class="panel">
+  <div class="hero">
+    <div class="creator-avatar"><img src="aya.jpg" alt="Aya"></div>
+    <div class="creator-info">
+      <h1><em>@akbnaya</em></h1>
+      <div class="creator-handle">Aya · Lifestyle & Events · Guyane française</div>
+      <div class="creator-bio">Mannequin et créatrice de contenu UGC, Aya couvre aussi bien le lifestyle quotidien que les événements — lancements, sorties, moments de groupe. Elle développe également une pratique en photographie, ce qui affine son regard et la qualité de ses mises en scène.</div>
+      <div class="tags">
+        <span class="tag">UGC Creator</span><span class="tag">Lifestyle</span><span class="tag">Events</span><span class="tag">Mannequin</span><span class="tag">Photographie</span><span class="tag">Guyane française</span>
+      </div>
+    </div>
+    <div class="stat-pill-row">
+      <div class="stat-pill"><div class="sp-val">5.6K</div><div class="sp-label">Abonnés</div></div>
+      <div class="stat-pill"><div class="sp-val">23</div><div class="sp-label">Publications</div></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="portrait-block">
+      <h3>Qui est <em>Aya</em> ?</h3>
+      <p>Aya est mannequin et créatrice de contenu UGC — son univers couvre le lifestyle quotidien autant que les événements : lancements, sorties, moments collectifs filmés avec naturel. Ce spectre large lui permet de s'adapter à différents formats sans perdre son esthétique personnelle. Elle développe aussi une pratique en photographie, ce qui lui permet de penser ses contenus à la fois comme modèle et comme créatrice visuelle.</p>
+      <p>Avec 5.6K abonnés pour seulement 23 publications, son compte est sélectif et soigné — chaque post ressemble à une image de portfolio plutôt qu'à un flux continu. C'est cette polyvalence lifestyle/events et ce regard affirmé qui en font un profil pertinent pour valoriser l'univers gourmand et esthétique de Moonbo.</p>
+    </div>
+
+    <span class="section-label">Exemples de contenus publiés</span>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="ig-embed-wrap"><iframe src="https://www.instagram.com/reel/DYkNc12Cm8w/embed/" height="480" scrolling="no" allowtransparency="true"></iframe></div>
+        <div class="video-info"><div class="vi-title">Reel événementiel</div><div class="vi-desc">Ambiance de groupe, énergie sociale et conviviale.</div></div>
+      </div>
+      <div class="video-card">
+        <div class="ig-embed-wrap"><iframe src="https://www.instagram.com/reel/DVjv8xaDFeX/embed/" height="480" scrolling="no" allowtransparency="true"></iframe></div>
+        <div class="video-info"><div class="vi-title">Reel soirée</div><div class="vi-desc">Moment de vie nocturne, dynamique et spontané.</div></div>
+      </div>
+      <div class="video-card">
+        <div class="ig-embed-wrap"><iframe src="https://www.instagram.com/reel/DQ4yOhmDH1Q/embed/" height="480" scrolling="no" allowtransparency="true"></iframe></div>
+        <div class="video-info"><div class="vi-title">Reel lancement/event</div><div class="vi-desc">Couverture d'un événement avec mise en scène soignée.</div></div>
+      </div>
+    </div>
+
+    <span class="section-label">Points clés à retenir</span>
+    <div class="signal-grid">
+      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Mannequin + créatrice UGC</strong>Double casquette qui lui donne une aisance naturelle devant la caméra et un sens de la mise en scène visuelle.</div></div>
+      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Regard photographique développé</strong>Sa pratique photo enrichit la qualité de ses contenus — pertinent pour un rendu esthétique Moonbo.</div></div>
+      <div class="signal-card"><div class="signal-icon pos">✓</div><div class="signal-text"><strong>Compte sélectif et soigné</strong>5.6K abonnés pour 23 publications — chaque post est pensé, pas posté à la va-vite.</div></div>
+      <div class="signal-card"><div class="signal-icon neu">~</div><div class="signal-text"><strong>Univers food à construire</strong>Lifestyle affirmé mais peu de contenu food visible — à orienter clairement dans le brief.</div></div>
+    </div>
+
+    <div class="conclusion">
+      <h2>Notre lecture du <em>profil</em></h2>
+      <p>Aya apporte une dimension visuelle et esthétique forte — son double profil mannequin/créatrice UGC lui donne une aisance devant l'objectif qui se sent immédiatement dans ses contenus. Son regard photographique en développement est un vrai atout pour valoriser des produits avec du caractère. Le brief devra orienter clairement vers l'univers food de Moonbo, mais la base créative est solide.</p>
+      <div class="verdict-row">
+        <div class="verdict-item"><div class="v-label">Qualité visuelle</div><div class="v-val pos">Très forte</div></div>
+        <div class="verdict-item"><div class="v-label">Aisance caméra</div><div class="v-val pos">Naturelle</div></div>
+        <div class="verdict-item"><div class="v-label">Alignement food</div><div class="v-val neu">À cadrer</div></div>
         <div class="verdict-item"><div class="v-label">Recommandation</div><div class="v-val pos">Profil retenu</div></div>
       </div>
     </div>
@@ -494,7 +487,7 @@
 
 <footer>
   <p><strong>JUMPLAB</strong> · Agence créative · Cayenne, Guyane française</p>
-  <p>Données source : Hafi.pro · Juin 2026 · Réf. JL-moonbo-2605</p>
+  <p>Réf. JL-moonbo-2605 · Juin 2026</p>
 </footer>
 
 <script>
