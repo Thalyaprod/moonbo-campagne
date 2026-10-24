@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/moonbo_campagne_complete.html" },
-    { "source": "/ugc", "destination": "/moonbo_ugc_createurs.html" }
+    { "source": "/ugc", "destination": "/moonbo_ugc_createurs.html" },
+    { "source": "/bethany", "destination": "/moonbo_ugc_bethany.html" }
   ]
 }
